@@ -1,6 +1,9 @@
 package com.example.demospringsecurity.config;
 
+import com.example.demospringsecurity.account.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -8,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Autowired
+    AccountService accountService;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests() // HttpServletRequest 을 사용하여 접근제한 설정 가능
@@ -17,5 +22,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.formLogin(); // Security에서 기본적으로 제공하는 Login폼 사용
         http.httpBasic(); // HTTP 기본 인증을 구성
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(accountService);
     }
 }
