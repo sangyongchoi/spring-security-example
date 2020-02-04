@@ -1,7 +1,6 @@
 package com.example.demospringsecurity.account;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
-import sun.security.util.Password;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
