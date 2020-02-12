@@ -19,19 +19,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests() // HttpServletRequest 을 사용하여 접근제한 설정 가능
-                .mvcMatchers("/", "/info","/account/**","/login","/logout").permitAll()  // "/" , "/info" 요청은 모두 허용한다.
+                .mvcMatchers("/", "/info","/account/**","/login**","/logoutForm").permitAll()  // "/" , "/info" 요청은 모두 허용한다.
                 .mvcMatchers("/admin").hasRole("ADMIN") // "/admin" 요청은 "ADMIN" 권한을 가지고 있어야 허용한다
                 .mvcMatchers("/user").hasRole("USER")
                 .anyRequest().authenticated(); // 그 외의 요청은 권한이 있기만 하면 허용한다.
 
         http.formLogin()
-                .loginPage("/login")
+                .loginPage("/loginForm")
                 .permitAll();
         http.httpBasic(); // HTTP 기본 인증을 구성
         http.logout()
                 .logoutSuccessUrl("/");
-
-
     }
 
     @Override
