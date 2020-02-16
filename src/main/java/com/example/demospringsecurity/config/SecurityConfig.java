@@ -30,6 +30,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic(); // HTTP 기본 인증을 구성
         http.logout()
                 .logoutSuccessUrl("/");
+
+        http.exceptionHandling()
+                .accessDeniedPage("/access-denied");
     }
 
     @Override

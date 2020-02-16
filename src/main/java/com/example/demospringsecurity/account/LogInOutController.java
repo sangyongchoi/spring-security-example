@@ -9,6 +9,6 @@ public class LogInOutController {
     public String login(){return "login";}
     @GetMapping("/loginForm")
     public String loginForm(){return "loginForm";}
-    @GetMapping("/logoutForm")
-    public String logoutForm(){return "logout";}
+    @GetMapping("/logout")
+    public String logoutForm(){return "redirect:logout";}
 }
